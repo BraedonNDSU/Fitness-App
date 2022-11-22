@@ -1,20 +1,77 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './Screens/LoginScreen';
+import HomeScreen from './Screens/HomeScreen';
+import Workout from './Screens/Workout';
+import Profile from './Screens/Profile';
+import Goals from './Screens/Goals';
+import Home from './Screens/Home';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+var tangerineColor = '#fcae1e';
+var topText = "Welcome to EZ Fitness!";
+var sizeOfIcons = 35;
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator
+      initialRouteName="Workout"
+      screenOptions={{
+        tabBarActiveTintColor: '#fcae1e',
+        tabBarStyle: {height: 100}
+      }}
+    >
+      <Tab.Screen
+        name= {topText}
+        component={Workout}
+        options={{
+          tabBarLabel: 'Workout',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="dumbbell" color={color} size={sizeOfIcons} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Goals"
+        component={Goals}
+        options={{
+          tabBarLabel: 'Goals',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="calendar-check" color={color} size={sizeOfIcons} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={sizeOfIcons} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen}/>
+        <Stack.Screen options={{headerShown: false}} name="Home" component={Home}/>
+      </Stack.Navigator>
+      {/* <MyTabs /> */}
+    </NavigationContainer>
+  );
+}
+
+export default App;
