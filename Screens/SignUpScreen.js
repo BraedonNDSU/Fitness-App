@@ -48,29 +48,38 @@ const LoginScreen = () => {
         style={styles.container}
         behavior="padding"
         >
-            <Text style = {{fontWeight: 'bold', marginBottom: 20, fontSize: 20}}>
-                Login to EZ Fitness!
+            <Text style = {{fontWeight: 'bold', fontSize: 20}}>
+                Create a new Account!
             </Text>
-            <View style = {{flexDirection: 'row'}}>
-                <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
-                <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
-            </View>
-            <View style = {{flexDirection: 'row', marginTop: 10, marginBottom: 20}}>
-                
-                <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
-                <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
-            </View>
+            <Text style = {{marginBottom: 20, fontSize: 20}}>
+                Join our community today!
+            </Text>
             <View style={styles.inputContainer}>
 
                 <TextInput
-                placeholder="Email:"
+                placeholder="Enter Full Name:"
                 value={email}
                 onChangeText={text => setEmail(text)}
                 style={styles.input}
                 />
 
                 <TextInput
-                placeholder="Password:"
+                placeholder="Enter Email:"
+                value={email}
+                onChangeText={text => setEmail(text)}
+                style={styles.input}
+                />
+
+                <TextInput
+                placeholder="Enter Password:"
+                value={password}
+                onChangeText={text => setPassword(text)}
+                style={styles.input}
+                secureTextEntry
+                />
+
+                <TextInput
+                placeholder="Confirm Password:"
                 value={password}
                 onChangeText={text => setPassword(text)}
                 style={styles.input}
@@ -95,8 +104,8 @@ const LoginScreen = () => {
             </View>
 
             <View style = {{flexDirection: 'row'}}>
-                <Text>Don't have an account? </Text>
-                <Text onPress={() => navigation.replace("SignUpScreen")}>Sign up!</Text>
+                <Text>Already have an account? </Text>
+                <Text onPress={() => navigation.replace("LoginScreen")}>Sign in!</Text>
             </View>
         </KeyboardAvoidingView>
     )

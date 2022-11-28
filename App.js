@@ -10,6 +10,7 @@ import Workout from './Screens/Workout';
 import Profile from './Screens/Profile';
 import Goals from './Screens/Goals';
 import Home from './Screens/Home';
+import SignUpScreen from './Screens/SignUpScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -66,7 +67,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen}/>
+        <Stack.Screen options={{headerShown: false}} name="LoginScreen" component={LoginScreen}/>
+        <Stack.Screen options={{headerShown: false}} name="SignUpScreen" component={SignUpScreen}/>
         <Stack.Screen options={{headerShown: false}} name="Home" component={Home}/>
       </Stack.Navigator>
       {/* <MyTabs /> */}
