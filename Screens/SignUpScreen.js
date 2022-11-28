@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import {Image} from 'react-native'
+import {Alert, ImageBackground} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { Keyboard, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
@@ -7,9 +7,13 @@ import { auth } from '../firebase'
 
 import fit1 from '../images/workout1.jpg';
 
+var color = 'orange';
+
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [fullName, setFullName] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const navigation = useNavigation()
 
@@ -24,31 +28,34 @@ const LoginScreen = () => {
     }, [])
 
     const handleSignUp = () => {
-        auth
-        .createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log('Registered with:', user.email);
-        })
-        .catch(error =>alert(error.message))
+        if (confirmPassword == password)
+        {
+            auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Welcome to EZ Fitness:', fullName);
+                Alert.alert("Congrats!", "You are now registered!")
+                // console.log('Registered with:', user.email);
+            })
+            .catch(error =>alert(error.message))
+        }
+        else
+        {
+            Alert.alert("Passwords do not match", "Make sure both passwords are the same")
+        }
+        
     }
-
-    const handleLogin = () => {
-        auth
-        .signInWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log('Logged in with:', user.email);
-        })
-        .catch(error =>alert(error.message))
-    }
-
+    
     return(
         <KeyboardAvoidingView
         style={styles.container}
         behavior="padding"
         >
-            <Text style = {{fontWeight: 'bold', fontSize: 20}}>
+            {/* <Text style = {{fontWeight: 'bold', fontSize: 20}}>
+                Welcome to EZ Fitness!
+            </Text> */}
+            <Text style = {{marginTop: 50, fontWeight: 'bold', fontSize: 20}}>
                 Create a new Account!
             </Text>
             <Text style = {{marginBottom: 20, fontSize: 20}}>
@@ -58,8 +65,8 @@ const LoginScreen = () => {
 
                 <TextInput
                 placeholder="Enter Full Name:"
-                value={email}
-                onChangeText={text => setEmail(text)}
+                value={fullName}
+                onChangeText={text => setFullName(text)}
                 style={styles.input}
                 />
 
@@ -80,32 +87,27 @@ const LoginScreen = () => {
 
                 <TextInput
                 placeholder="Confirm Password:"
-                value={password}
-                onChangeText={text => setPassword(text)}
+                value={confirmPassword}
+                onChangeText={text => setConfirmPassword(text)}
                 style={styles.input}
                 secureTextEntry
                 />
             </View>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                onPress={handleLogin}
-                style={styles.button}
-                >
-                <Text style={styles.buttonText}>Login</Text>
-                </TouchableOpacity>
 
                 <TouchableOpacity
                 onPress={handleSignUp}
-                style={[styles.button, styles.buttonOutline]}
+                style={styles.button}
                 >
-                <Text style={styles.buttonOutlineText}>Register</Text>
+                <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
+
             </View>
 
             <View style = {{flexDirection: 'row'}}>
                 <Text>Already have an account? </Text>
-                <Text onPress={() => navigation.replace("LoginScreen")}>Sign in!</Text>
+                <Text style = {{color: 'orange'}} onPress={() => navigation.replace("LoginScreen")}>Sign in!</Text>
             </View>
         </KeyboardAvoidingView>
     )
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     button: {
-        backgroundColor: '#0782F9',
+        backgroundColor: 'orange',
         width: '100%',
         padding: 15,
         borderRadius: 10,
@@ -164,5 +166,8 @@ const styles = StyleSheet.create({
         width: 75,
         height: 75,
         marginLeft: 10
+    },
+    background: {
+        opacity: 100
     }
 })

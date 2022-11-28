@@ -10,7 +10,7 @@ const Profile = () => {
     auth
       .signOut()
       .then(() => {
-        navigation.replace("Login")
+        navigation.replace("LoginScreen")
       })
       .catch(error => alert(error.message))
   }

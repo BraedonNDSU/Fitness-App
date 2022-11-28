@@ -1,11 +1,9 @@
 import { useNavigation } from '@react-navigation/native'
-import {Image} from 'react-native'
+import {Alert, Image} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { Keyboard, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { auth } from '../firebase'
-
-import fit1 from '../images/workout1.jpg';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -23,27 +21,19 @@ const LoginScreen = () => {
         return unsubscribe
     }, [])
 
-    const handleSignUp = () => {
-        auth
-        .createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log('Registered with:', user.email);
-        })
-        .catch(error =>alert(error.message))
-    }
-
     const handleLogin = () => {
         auth
         .signInWithEmailAndPassword(email, password)
         .then(userCredentials => {
             const user = userCredentials.user;
             console.log('Logged in with:', user.email);
+            Alert.alert("Welcome", "You are now logged in!")
         })
         .catch(error =>alert(error.message))
     }
 
     return(
+
         <KeyboardAvoidingView
         style={styles.container}
         behavior="padding"
@@ -53,12 +43,12 @@ const LoginScreen = () => {
             </Text>
             <View style = {{flexDirection: 'row'}}>
                 <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
-                <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
+                <Image source={require('../images/workout2.jpg')} style = {styles.fitnessImage} />
             </View>
             <View style = {{flexDirection: 'row', marginTop: 10, marginBottom: 20}}>
                 
-                <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
-                <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
+                <Image source={require('../images/workout3.jpg')} style = {styles.fitnessImage} />
+                <Image source={require('../images/workout4.jpg')} style = {styles.fitnessImage} />
             </View>
             <View style={styles.inputContainer}>
 
@@ -85,18 +75,11 @@ const LoginScreen = () => {
                 >
                 <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity
-                onPress={handleSignUp}
-                style={[styles.button, styles.buttonOutline]}
-                >
-                <Text style={styles.buttonOutlineText}>Register</Text>
-                </TouchableOpacity>
             </View>
 
             <View style = {{flexDirection: 'row'}}>
                 <Text>Don't have an account? </Text>
-                <Text onPress={() => navigation.replace("SignUpScreen")}>Sign up!</Text>
+                <Text style = {{color: 'orange'}} onPress={() => navigation.replace("SignUpScreen")}>Sign up!</Text>
             </View>
         </KeyboardAvoidingView>
     )
@@ -129,7 +112,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     button: {
-        backgroundColor: '#0782F9',
+        backgroundColor: 'orange',
         width: '100%',
         padding: 15,
         borderRadius: 10,
@@ -138,7 +121,7 @@ const styles = StyleSheet.create({
     buttonOutline: {
         backgroundColor: 'white',
         marginTop: 5,
-        borderColor: '#0782F9',
+        borderColor: 'orange',
         borderwidth: 2,
     },
     buttonText: {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { Text, View, ImageBackground, Image } from 'react-native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -11,14 +11,25 @@ import Profile from './Screens/Profile';
 import Goals from './Screens/Goals';
 import Home from './Screens/Home';
 import SignUpScreen from './Screens/SignUpScreen';
+import { Dimensions } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 var tangerineColor = '#fcae1e';
 var topText = "Welcome to EZ Fitness!";
 var sizeOfIcons = 35;
+const { width, height } = Dimensions.get("screen");
 
 const Tab = createBottomTabNavigator();
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)',
+    background: 'transparent',
+  },
+};
 
 function MyTabs() {
   return (
@@ -65,14 +76,20 @@ function MyTabs() {
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <ImageBackground source={require('./images/background.png')} style={{
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
+    }}>
+    <NavigationContainer theme = {MyTheme}>
       <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="LoginScreen" component={LoginScreen}/>
         <Stack.Screen options={{headerShown: false}} name="SignUpScreen" component={SignUpScreen}/>
+        <Stack.Screen options={{headerShown: false}} name="LoginScreen" component={LoginScreen}/>
         <Stack.Screen options={{headerShown: false}} name="Home" component={Home}/>
       </Stack.Navigator>
       {/* <MyTabs /> */}
     </NavigationContainer>
+    </ImageBackground>
   );
 }
 
