@@ -29,7 +29,7 @@ function MyTabs() {
         }}
       >
         <Tab.Screen
-          name= {topText}
+          name= "Workout"
           component={Workout}
           options={{
             tabBarLabel: 'Workout',

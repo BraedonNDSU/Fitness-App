@@ -1,65 +1,52 @@
-import { Modal, View, Text, TextInput, StyleSheet, Button, ImageBackground, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Linking, Button, Image } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import { auth } from '../firebase'
 
-export default function AddaGoal(props){
+const NavigatePage5 = () => {
+    const navigation = useNavigation()
+  return (
+    <View style = {styles.container}>
+        
+        <Text style = {{textAlign: 'center', fontSize: 25, fontWeight: 'bold', textDecorationLine: 'underline'}}>Using "Goals"</Text>
 
-    let [goal, setGoal] = React.useState("");
-    return(
-        <ImageBackground source={require("../images/background.png")} style={{
-            flex: 1,
-            resizeMode: 'cover',
-            justifyContent: 'center',
-          }}>
-        <View style  ={styles.container}>
-            <Text style = {{marginBottom: 25, fontWeight: 'bold'}}>Enter Goal Below!</Text>
-            <Text>Be as descripted as possible! :)</Text>
+        <Text style = {{textAlign: 'center', marginTop: 20, marginBottom: 20, fontSize: 25, fontWeight: 'bold'}}>Enter in a goal using the text box shown below</Text>
 
-            <View style={styles.inputContainer}>
-            <TextInput
-                placeholder="Goal:"
-                placeholderTextColor= '#949494'
-                value={goal}
-                onChangeText={setGoal}
-                style={styles.input}
-                />
-            </View>
+        <Image source={require('../images/tutorial4.jpg')} resizeMode = "contain" resizeMethod='scale'  style = {{width: 250, height: 400}}/>
 
-            <View style = {{flexDirection: 'row'}}>
-                {/* <Button title = "Cancel" onPress = {props.onClose}></Button> */}
+        <Text style = {{textAlign: 'center', marginTop: 20, fontSize: 25, fontWeight: 'bold'}}>Once done, click on "Add Goal" to add it to your list.</Text>
+
+        <View style = {{flexDirection: 'row'}}>
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                onPress = {props.onClose}
+                onPress={() => {navigation.navigate("NavigatePage4")}}
                 style={{        backgroundColor: 'red',
                 width: '100%',
                 padding: 15,
                 borderRadius: 10,
+                marginLeft: 15,
                 alignItems: 'center'}}
                 >
-                <Text style={styles.buttonText}>Cancel</Text>
+                <Text style={styles.buttonText}>Back</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                onPress = {() => {
-                    props.addGoal(goal);
-                    setGoal("");
-                    props.onClose();
-                }}
+                onPress={() => {navigation.navigate("NavigatePage6")}}
                 style={styles.button}
                 >
-                <Text style={styles.buttonText}>Add Goal!</Text>
+                <Text style={styles.buttonText}>Next</Text>
                 </TouchableOpacity>
             </View>
-
-
-
             </View>
-        </View>
-        </ImageBackground>
-    )
+    </View>
+  )
 }
+
+export default NavigatePage5
 
 const styles = StyleSheet.create({
     container: {
@@ -113,8 +100,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     fitnessImage: {
-        width: 75,
-        height: 75,
-        marginLeft: 10
+        flex: 1,
+        width: 250,
+        height: 50,
+        resizeMode: 'contain'
     }
 })

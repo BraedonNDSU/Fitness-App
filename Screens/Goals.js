@@ -1,11 +1,12 @@
-import { View, Button, Text, Modal, SafeAreaView, ActivityIndicator, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Button, Text, Modal, SafeAreaView, ActivityIndicator, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import InlineTextButton from './InlineTextButton';
 import React from 'react'
 import AddaGoal from './AddaGoal';
 import { useNavigation } from '@react-navigation/native'
 import {auth, db} from "../firebase";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { collection, addDoc, query, where, getDocs, deleteDoc, doc, setDoc } from "firebase/firestore"; 
+import { collection, addDoc, query, where, getDocs, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
@@ -49,19 +50,36 @@ const Goals = (navigation) => {
 
   let renderToDoItem = ({item}) => {
     return (
-      <View>
+      <View style={{
+        borderWidth: 5,
+        borderColor: "orange",
+        borderRadius: 0,
+        padding: 15,
+        color: 'orange',
+        marginBottom: 10
+      }}>
         <View>
           <BouncyCheckbox
+          style = {{marginBottom: 10}}
             isChecked={item.complated}
             size={25}
-            fillColor="#32CD32"
+            fillColor="orange"
             unfillColor="#FFFFFF"
-            text={item.text}
+            text={<Text style={{fontWeight: 'bold', color: 'orange', fontSize: 15}}>{item.text}</Text>}
             iconStyle={{ borderColor: "#258ea6" }}
             onPress={(isChecked) => { checkGoalItem(item, isChecked)}}
           />
         </View>
-        <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteGoal(item.id)} />
+        {/* <Button title="Delete Goal" color="red" onPress={() => deleteGoal(item.id)}>Test</Button> */}
+        <View>
+                <TouchableOpacity
+                onPress = {() => deleteGoal(item.id)}
+                style={{fontWeight: 'bold',
+                alignItems: 'center'}}
+                >
+                <Text style={{color: 'red', fontWeight: 'bold'}}>Delete Goal</Text>
+                </TouchableOpacity>
+            </View>
       </View>
     );
   }
@@ -92,16 +110,7 @@ const Goals = (navigation) => {
     );
   };
 
-  let showSendVerificationEmail = () => {
-    return (
-      <View>
-        <Text>Please verify your email to use ToDo</Text>
-        <Button title="Send Verification Email" onPress={() => sendEmailVerification(auth.currentUser)} />
-      </View>
-    );
-  };
-
-  let addToDo = async (todo) => {
+  let addGoal = async (todo) => {
     let toDoToSave = {
       text: todo,
       completed: false,
@@ -131,12 +140,15 @@ const Goals = (navigation) => {
         onRequestClose={() => setModalVisible(false)}>
           <AddaGoal
             onClose={() => setModalVisible(false)}
-            addToDo={addToDo}/>
+            addGoal={addGoal}/>
 
         </Modal>
-      <View style = {{borderBottomWidth: 2, marginTop: 150}}>
-          <Text title = "List of Goals" style = {{fontSize: 25, fontWeight: 'bold', marginTop: 20}}>List of Goals:</Text>
+      <View style = {{borderBottomWidth: 2, marginTop: 250, marginBottom: 20, flexDirection: 'row'}}>
+          <Text title = "List of Goals" style = {{fontSize: 25, fontWeight: 'bold', marginTop: 20}}>List of Goals: </Text>
+          <MaterialCommunityIcons style = {{marginTop: 22}} name="calendar-check-outline" color='black' size={25}/>
       </View>
+      <Image source={require('../images/goal.jpg')} style = {{      width: 150,
+      height: 90}} />
       {/* <Button style = {styles.buttonContainer}title ="Add a Goal" color = 'orange' onPress = {() => setModalVisible(true)}></Button> */}
 
       <View style={styles.buttonContainer}>
@@ -146,7 +158,7 @@ const Goals = (navigation) => {
                 >
                 <Text style={styles.buttonText}>Add a Goal!</Text>
                 </TouchableOpacity>
-            </View>
+      </View>
       {showContent()}
       
 
@@ -188,7 +200,7 @@ const styles = StyleSheet.create({
       marginBottom: 20
   },
   button: {
-      backgroundColor: '#32CD32',
+      backgroundColor: 'orange',
       width: '100%',
       padding: 15,
       borderRadius: 10,
