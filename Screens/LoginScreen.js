@@ -6,6 +6,7 @@ import { TextInput } from 'react-native-gesture-handler'
 import { auth } from '../firebase'
 
 const LoginScreen = () => {
+    //used to store input values
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -21,6 +22,7 @@ const LoginScreen = () => {
         return unsubscribe
     }, [])
 
+    //Used for authentication and logging in users
     const handleLogin = () => {
         auth
         .signInWithEmailAndPassword(email, password)
@@ -41,6 +43,8 @@ const LoginScreen = () => {
             <Text style = {{fontWeight: 'bold', marginBottom: 20, fontSize: 20}}>
                 Login to EZ Fitness!
             </Text>
+
+            {/* The four pictures */}
             <View style = {{flexDirection: 'row'}}>
                 <Image source={require('../images/workout1.jpg')} style = {styles.fitnessImage} />
                 <Image source={require('../images/workout2.jpg')} style = {styles.fitnessImage} />
@@ -50,6 +54,8 @@ const LoginScreen = () => {
                 <Image source={require('../images/workout3.jpg')} style = {styles.fitnessImage} />
                 <Image source={require('../images/workout4.jpg')} style = {styles.fitnessImage} />
             </View>
+
+            {/* User input */}
             <View style={styles.inputContainer}>
 
                 <TextInput
@@ -77,6 +83,7 @@ const LoginScreen = () => {
                 </TouchableOpacity>
             </View>
 
+            {/* Switch to Sign up */}
             <View style = {{flexDirection: 'row'}}>
                 <Text>Don't have an account? </Text>
                 <Text style = {{color: 'orange'}} onPress={() => navigation.replace("SignUpScreen")}>Sign up!</Text>

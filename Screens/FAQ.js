@@ -45,7 +45,7 @@ const FAQ = () => {
            Click on one of the 4 orange boxes, which will open up more information, along with helpful videos :)
           </Text>
           
-
+        {/* Button to go Back */}
       <TouchableOpacity
         onPress={() => {navigation.navigate("Profile")}}
         style={styles.button}
@@ -53,12 +53,6 @@ const FAQ = () => {
         <Text style={styles.buttonText}>Go Back</Text>
         
       </TouchableOpacity>
-       
-
-
-
-
-        
     </View>
   )
 }

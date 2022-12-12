@@ -21,6 +21,7 @@ const Workout = (props) => {
             </Text>
             <View style = {{flexDirection: 'row'}}>
 
+            {/* Each TouchableOpacity represents a different form of exercise */}
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                 onPress={() => {navigation.navigate("Strength")}}
@@ -91,13 +92,6 @@ const Workout = (props) => {
                 
                 </TouchableOpacity>
             </View>
-
-
-
-                {/* <Button style = {styles.button}>Yoga</Button>
-                <Button>Nutrition</Button> */}
-                {/* <Image source={require('../images/workout3.jpg')} style = {styles.fitnessImage} />
-                <Image source={require('../images/workout4.jpg')} style = {styles.fitnessImage} /> */}
             </View>
     </View>
   )

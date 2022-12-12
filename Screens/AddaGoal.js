@@ -5,15 +5,20 @@ export default function AddaGoal(props){
 
     let [goal, setGoal] = React.useState("");
     return(
+
+        //Background for Screen
         <ImageBackground source={require("../images/background.png")} style={{
             flex: 1,
             resizeMode: 'cover',
             justifyContent: 'center',
           }}>
+
+
         <View style  ={styles.container}>
             <Text style = {{marginBottom: 25, fontWeight: 'bold'}}>Enter Goal Below!</Text>
             <Text>Be as descripted as possible! :)</Text>
 
+            {/* Box for text input */}
             <View style={styles.inputContainer}>
             <TextInput
                 placeholder="Goal:"
@@ -24,8 +29,8 @@ export default function AddaGoal(props){
                 />
             </View>
 
+            {/* Two buttons, labeled Cancel and Add Goal! */}
             <View style = {{flexDirection: 'row'}}>
-                {/* <Button title = "Cancel" onPress = {props.onClose}></Button> */}
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity

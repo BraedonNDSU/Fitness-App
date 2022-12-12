@@ -7,7 +7,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const Yoga = () => {
   return (
     <View>
-        
+                {/* View Style represents a new bullet point.
+        Every button represents a link to a video or website
+        Every Text Stlye represents a portion of text in the bullet point */}
         <Text style = {{textAlign: 'center', marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>Tips and Tricks for Yoga:</Text>
         <Image source={require('../images/yoga.jpg')} style = {styles.fitnessButton} />
 

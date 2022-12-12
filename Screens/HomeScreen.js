@@ -4,6 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { auth } from '../firebase'
 
 const HomeScreen = () => {
+
+  //THIS IS NOT USED ON THE APPLICATION, THIS IS HERE FOR TESTING
   const navigation = useNavigation()
 
   const handleSignOut = () => {

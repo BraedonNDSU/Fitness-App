@@ -7,7 +7,9 @@ import { auth } from '../firebase'
 const Nutrition = () => {
   return (
     <View>
-        
+        {/* View Style represents a new bullet point.
+        Every button represents a link to a video or website
+        Every Text Stlye represents a portion of text in the bullet point */}
         <Text style = {{textAlign: 'center', marginTop: 30, fontSize: 25, fontWeight: 'bold'}}>Importance of Nutrition:</Text>
         <Image source={require('../images/nutrition.jpg')} style = {styles.fitnessButton} />
 

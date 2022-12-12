@@ -16,7 +16,7 @@ const Goals = (navigation) => {
   let [isRefreshing, setIsRefreshing] = React.useState(false);
   let [goals, setGoals] = React.useState([]);
 
-
+  //Loads the lists of goals based on the user credentials
   let loadGoalList = async () => {
     const q = query(collection(db, "todos"), where("userId", "==", auth.currentUser.uid));
 
@@ -37,17 +37,20 @@ const Goals = (navigation) => {
     loadGoalList();
   }
 
+  //adds checkmark to goal
   let checkGoalItem = (item, isChecked) => {
     const goalRef = doc(db, 'todos', item.id);
     setDoc(goalRef, { completed: isChecked }, { merge: true });
   };
 
+  //Removes goal from the database
   let deleteGoal = async (GoalId) => {
     await deleteDoc(doc(db, "todos", GoalId));
     let updatedToDos = [...goals].filter((item) => item.id != GoalId);
     setGoals(updatedToDos);
   };
 
+  //Shows the user what goal they have
   let renderToDoItem = ({item}) => {
     return (
       <View style={{
@@ -70,7 +73,6 @@ const Goals = (navigation) => {
             onPress={(isChecked) => { checkGoalItem(item, isChecked)}}
           />
         </View>
-        {/* <Button title="Delete Goal" color="red" onPress={() => deleteGoal(item.id)}>Test</Button> */}
         <View>
                 <TouchableOpacity
                 onPress = {() => deleteGoal(item.id)}
@@ -98,6 +100,7 @@ const Goals = (navigation) => {
     )
   };
 
+  //Loads content to the return
   let showContent = () => {
     return (
       <View>
@@ -110,6 +113,7 @@ const Goals = (navigation) => {
     );
   };
 
+  //Adds the goal, using the AddaGoal.js
   let addGoal = async (todo) => {
     let toDoToSave = {
       text: todo,
@@ -128,11 +132,10 @@ const Goals = (navigation) => {
 
   return (
     
-    // <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <View style  ={styles.container}
     behavior="padding">
 
-
+      {/* Used for swapping to AddaGoal.js */}
       <Modal
         animationType="slide"
         transparent={false}
@@ -149,7 +152,6 @@ const Goals = (navigation) => {
       </View>
       <Image source={require('../images/goal.jpg')} style = {{      width: 150,
       height: 90}} />
-      {/* <Button style = {styles.buttonContainer}title ="Add a Goal" color = 'orange' onPress = {() => setModalVisible(true)}></Button> */}
 
       <View style={styles.buttonContainer}>
                 <TouchableOpacity

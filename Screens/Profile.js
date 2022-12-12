@@ -19,7 +19,10 @@ const Profile = () => {
       })
       .catch(error => alert(error.message))
   }
-
+  //Profile has three functions, 
+  // 1. FAQ 
+  // 2. Tutorial
+  // 3. Logout
   return (
     <View style={styles.container}>
       

@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { auth } from '../firebase'
 
 const NavigatePage3 = () => {
+    //PAGE 3 of 7
     const navigation = useNavigation()
   return (
     <View style = {styles.container}>

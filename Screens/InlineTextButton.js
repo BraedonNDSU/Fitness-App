@@ -1,6 +1,7 @@
 import { Text, Pressable, StyleSheet } from 'react-native';
 
 export default function InlineTextButton(props) {
+  //Used for displaying the goals in Goals.js
   let style = {};
   if (props.color) {
     style.color = props.color

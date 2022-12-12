@@ -27,6 +27,7 @@ const LoginScreen = () => {
         return unsubscribe
     }, [])
 
+    //Creates new user for authentication
     const handleSignUp = () => {
         if (confirmPassword == password)
         {
@@ -52,15 +53,16 @@ const LoginScreen = () => {
         style={styles.container}
         behavior="padding"
         >
-            {/* <Text style = {{fontWeight: 'bold', fontSize: 20}}>
-                Welcome to EZ Fitness!
-            </Text> */}
+            {/* Text for the top of the signup screen */}
+
             <Text style = {{marginTop: 50, fontWeight: 'bold', fontSize: 20}}>
                 Create a new Account!
             </Text>
             <Text style = {{marginBottom: 20, fontSize: 20}}>
                 Join our community today!
             </Text>
+
+            {/* Text input from user */}
             <View style={styles.inputContainer}>
 
                 <TextInput
@@ -94,6 +96,7 @@ const LoginScreen = () => {
                 />
             </View>
 
+            {/* Register Button */}
             <View style={styles.buttonContainer}>
 
                 <TouchableOpacity
@@ -105,6 +108,7 @@ const LoginScreen = () => {
 
             </View>
 
+            {/* Switches to LoginScreen.js */}
             <View style = {{flexDirection: 'row'}}>
                 <Text>Already have an account? </Text>
                 <Text style = {{color: 'orange'}} onPress={() => navigation.replace("LoginScreen")}>Sign in!</Text>

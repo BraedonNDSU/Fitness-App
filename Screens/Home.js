@@ -18,7 +18,7 @@ var sizeOfIcons = 35;
 
 const Tab = createBottomTabNavigator();
 
-
+//Displays Bottom Tab Navigator, which is used throughout the application
 function MyTabs() {
     return (
       <Tab.Navigator
